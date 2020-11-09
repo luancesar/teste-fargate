@@ -3,7 +3,7 @@ on:
     types: [created]
   push:
     branches:
-      - develop
+      - master
 
 name: Deploy to Amazon ECS
 
