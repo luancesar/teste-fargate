@@ -1,18 +1,18 @@
-export function isEmpty(value) {
+export function isEmpty(value: string) {
   if (value === '' || value === undefined || value === null) {
     return true;
   }
   return false;
 }
 
-export function isNotEmpty(value) {
+export function isNotEmpty(value:string) {
   if (value !== '' && value !== undefined && value !== null) {
     return true;
   }
   return false;
 }
 
-export function replaceAt(value, index, replacement) {
+export function replaceAt(value: string, index: number, replacement: string) {
   return (
     value.substr(0, index) +
     replacement +

@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import logger from './logger';
 import authConfig from '../config/auth';
+import {Request, Response, NextFunction} from 'express'
 
-export default async (req, res, next) => {
+export default async (req: Request, res: Response, next: NextFunction) => {
   try {
     const authHeader = req.headers.authorization;
 
@@ -13,7 +14,7 @@ export default async (req, res, next) => {
 
     const parts = authHeader.split(' ');
 
-    if (!parts.length === 2) {
+    if (!(parts.length === 2)) {
       logger.info('Retorno: Token error');
       return res.status(401).json({ error: 'Token error' });
     }
@@ -25,12 +26,12 @@ export default async (req, res, next) => {
       return res.status(401).json({ error: 'Token mal formatado' });
     }
 
-    jwt.verify(token, authConfig.secret, (err, decoded) => {
+    jwt.verify(token, <jwt.Secret>authConfig.secret, (err, decoded) => {
       if (err) {
         logger.info('Retorno: Token inválido');
         return res.status(401).json({ error: 'Token inválido' });
       }
-      req.userId = decoded.id;
+      // req.userId = decoded.id;
       return next();
     });
   } catch (error) {

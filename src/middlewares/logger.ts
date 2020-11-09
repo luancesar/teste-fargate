@@ -12,11 +12,9 @@ const filename = `${logDir}/log-api.log`;
 
 const logger = winston.createLogger({
   level: 'info',
-  handleExceptions: true,
   format: winston.format.combine(
     winston.format.simple(),
     winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    winston.format.label({ label: path.basename(process.mainModule.filename) }),
     winston.format.printf(
       info =>
         `[${info.timestamp}] [${info.label}] ${info.level}: ${info.message}`
@@ -26,10 +24,10 @@ const logger = winston.createLogger({
   exitOnError: false,
 });
 
-logger.stream = {
-  write: message => {
-    logger.info(message);
-  },
-};
+// logger.stream = {
+//   write: (message: string) => {
+//     return logger.info(message);
+//   },
+// };
 
 export default logger;
