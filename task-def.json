@@ -8,7 +8,7 @@
           "image": "283527104405.dkr.ecr.us-east-1.amazonaws.com/repo-teste-fargate:2ed18cd791061a2827ee017320a8598ae3a6689c:latest",
           "portMappings": [
               {
-                  "containerPort": 80,
+                  "containerPort": 3333,
                   "hostPort": 80,
                   "protocol": "tcp"
               }
