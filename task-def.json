@@ -1,11 +1,10 @@
 {
-  
   "family": "sample-fargate",
   "networkMode": "awsvpc",
   "containerDefinitions": [
       {
           "name": "fargate-app",
-          "image": "nginx:latest",
+          "image": "httpd:2.4",
           "portMappings": [
               {
                   "containerPort": 80,
