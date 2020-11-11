@@ -13,13 +13,7 @@
                   "protocol": "tcp"
               }
           ],
-          "essential": true,
-          "dependsOn": [
-            {
-              "containerName": "nodejs",
-              "condition": "HEALTHY"
-            }
-          ]
+          "essential": true
       },
       {
           "name": "mongodb",
