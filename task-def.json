@@ -1,6 +1,6 @@
 {
   "family": "sample-fargate",
-  "executionRoleArn": "arn:aws:iam::283527104405:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+  "executionRoleArn": "arn:aws:iam::283527104405:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
   "containerDefinitions": [
       {
