@@ -4,12 +4,30 @@
   "networkMode": "awsvpc",
   "containerDefinitions": [
       {
-          "name": "fargate-app",
+          "name": "nodejs",
           "image": "283527104405.dkr.ecr.us-east-1.amazonaws.com/repo-teste-fargate:latest",
           "portMappings": [
               {
-                  "containerPort": 80,
-                  "hostPort": 80,
+                  "containerPort": 3333,
+                  "hostPort": 3333,
+                  "protocol": "tcp"
+              }
+          ],
+          "essential": true
+          "dependsOn": [
+            {
+              "containerName": "nodejs",
+              "condition": "HEALTHY"
+            }
+          ]
+      },
+      {
+          "name": "nodejs",
+          "image": "283527104405.dkr.ecr.us-east-1.amazonaws.com/repo-teste-fargate:latest",
+          "portMappings": [
+              {
+                  "containerPort": 27017,
+                  "hostPort": 27017,
                   "protocol": "tcp"
               }
           ],
