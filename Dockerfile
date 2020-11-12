@@ -38,5 +38,3 @@ EXPOSE 3333
 
 # executa o comando para iniciar a aplicação - neste caso, node index.js (arquivo definido como main no package.json), yarn start (para iniciar a aplicação)
 CMD ["yarn", "start" ]
-
-RUN -d -p 27017:27017 --name mongodb dockerfile/mongodb
