@@ -13,12 +13,12 @@
                   "protocol": "tcp"
               }
           ],
-          "logConfiguration": {
+         "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
-                "awslogs-group": "awslogs-nodejs",
+                "awslogs-group": "fartgate-logs",
                 "awslogs-region": "us-east-1",
-                "awslogs-stream-prefix": "awslogs-example"
+                "awslogs-stream-prefix": "teste-01"
             }
         },
         "essential": true
