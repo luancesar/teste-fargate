@@ -22,6 +22,26 @@
             }
         },
         "essential": true
+      },
+    {
+          "name": "mongodb",
+          "image": "283527104405.dkr.ecr.us-east-1.amazonaws.com/repo-teste-fargate:latest",
+          "portMappings": [
+              {
+                  "containerPort": 27017,
+                  "hostPort": 27017,
+                  "protocol": "tcp"
+              }
+          ],
+         "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "fartgate-logs",
+                "awslogs-region": "us-east-1",
+                "awslogs-stream-prefix": "teste-01"
+            }
+        },
+        "essential": true
       }
   ],
   "requiresCompatibilities": [
