@@ -25,7 +25,7 @@
       },
     {
           "name": "mongodb",
-          "image": "283527104405.dkr.ecr.us-east-1.amazonaws.com/repo-teste-fargate:latest",
+          "image": "283527104405.dkr.ecr.us-east-1.amazonaws.com/mongo:latest",
           "portMappings": [
               {
                   "containerPort": 27017,
