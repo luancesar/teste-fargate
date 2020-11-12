@@ -13,7 +13,15 @@
                   "protocol": "tcp"
               }
           ],
-          "essential": true
+          "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "awslogs-nodejs",
+                "awslogs-region": "us-east-1",
+                "awslogs-stream-prefix": "awslogs-example"
+            }
+        },
+        "essential": true
       }
   ],
   "requiresCompatibilities": [
