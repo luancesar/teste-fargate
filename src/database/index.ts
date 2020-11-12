@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 require('dotenv/config');
 
 mongoose.connect(
-  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-w8s7a.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+  `mongodb+srv://squads:squads@cluster0-w8s7a.mongodb.net/squads?retryWrites=true&w=majority`,
   {
     useUnifiedTopology: true,
     useNewUrlParser: true,
