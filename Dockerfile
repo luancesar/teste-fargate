@@ -4,10 +4,10 @@ FROM node:12
 ENV YARN_VERSION 1.22.5
 # Realiza os aceites de termos do yarn
 RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-    && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
-    && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
-    && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
-    && rm yarn-v$YARN_VERSION.tar.gz
+  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
+  && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
+  && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
+  && rm yarn-v$YARN_VERSION.tar.gz
 
 # cria o subdiretório node_modules em /home/node juntamente com o diretório app.
 # A criação desses diretórios garantirá que eles tenham as permissões que desejamos,
@@ -39,5 +39,4 @@ EXPOSE 3333
 # executa o comando para iniciar a aplicação - neste caso, node index.js (arquivo definido como main no package.json), yarn start (para iniciar a aplicação)
 CMD ["yarn", "start" ]
 
-
-
+RUN -d -p 27017:27017 --name mongodb dockerfile/mongodb
