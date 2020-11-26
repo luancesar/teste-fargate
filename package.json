@@ -5,7 +5,7 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --inspect --ignore-watch node_modules src/server.ts"
+    "start": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
