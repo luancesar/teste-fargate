@@ -1,11 +1,8 @@
-
 import Profile from '../models/Profile';
-import { isEmpty } from '../helpers/funcoes';
+import AppError from '../errors/AppError';
 
 class ProfileService {
-
   async index() {
-
     const profiles = await Profile.find();
 
     return profiles;
@@ -14,7 +11,7 @@ class ProfileService {
   async show(id: string) {
     const profile = await Profile.findById(id).populate('user');
     if (!profile) {
-      throw new Error('Perfil não encontrado');
+      throw new AppError('Perfil não encontrado');
     }
     return profile;
   }

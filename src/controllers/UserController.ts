@@ -1,59 +1,63 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-underscore-dangle */
+import { Response, Request } from 'express';
+import * as Yup from 'yup';
 import UserService from '../services/UserService';
-import { Response, Request} from 'express';
 
 export default class UserController {
   async index(req: Request, res: Response) {
-    try {
-      const users = await UserService.index();
-      res.json(users)
-    } catch (error) {
-
-      res.status(500).json({ error });
-
-    }
+    const users = await UserService.index();
+    res.json(users);
   }
 
   async show(req: Request, res: Response) {
-    try {
-      const user = await UserService.show(req.params.id);
-      return res.json(user);
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
-
+    const user = await UserService.show(req.params.id);
+    return res.json(user);
   }
 
   async store(req: Request, res: Response) {
-    try {
-      const newUser = UserService.store(req.body);
-      return res.status(201).json( newUser);
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().required().min(6),
+    });
 
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+    await schema.validate(req.body, {
+      abortEarly: false,
+    });
+
+    const newUser = UserService.store(req.body);
+    return res.status(201).json(newUser);
   }
 
   async update(req: Request, res: Response) {
-    try {
+    const schema = Yup.object().shape({
+      name: Yup.string(),
+      oldPassword: Yup.string().min(6),
+      password: Yup.string()
+        .min(6)
+        .when('oldPassword', (oldPassword: string, field: Yup.ObjectSchema) =>
+          oldPassword ? field.required() : field
+        ),
+      confirmationPassword: Yup.string()
+        .min(6)
+        .when('password', (password: string, field: Yup.ObjectSchema) =>
+          password ? field.required().oneOf([Yup.ref('password')]) : field
+        ),
+    });
 
-      UserService.update(req.params.id, req.body)
+    await schema.validate(req.body, {
+      abortEarly: false,
+    });
 
-      return res.status(204).json();
+    UserService.update(req.params.id, req.body);
 
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+    return res.status(204).json();
   }
 
   async delete(req: Request, res: Response) {
-    try {
-      await UserService.delete(req.params.id);
+    await UserService.delete(req.params.id);
 
-      return res.status(204).json();
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+    return res.status(204).json();
   }
 }
-

@@ -1,11 +1,10 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-
-interface IUser extends Document{
-  name: string,
-  email: string,
-  password: string
+interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
 }
 
 const UserSchema = new Schema(
@@ -31,17 +30,9 @@ const UserSchema = new Schema(
   }
 );
 
-UserSchema.pre('save',  async function(this: IUser, next) {
-
+UserSchema.pre('save', async function (this: IUser, next) {
   const hash = await bcrypt.hash(this.password, 10);
   this.password = hash;
-
-  next();
-});
-
-UserSchema.pre('findOneAndUpdate', async function(next) {
-  const hash = await bcrypt.hash(this.getUpdate().password, 10);
-  this.getUpdate().password = hash;
 
   next();
 });
